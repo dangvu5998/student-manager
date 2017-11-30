@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {Grid, Col} from 'react-bootstrap'
 import SearchComponent from './SearchComponent'
 import StudentList from './StudentList'
-import {Route} from 'react-router-dom'
 import StudentDetails from './StudentDetails'
 export default class DashBoard extends Component {
   state = {
@@ -11,6 +10,9 @@ export default class DashBoard extends Component {
   selectItem(id) {
     const student = this.props.studentList.find(student => student.studentId === id)
     this.setState({selectedStudent: student})
+  }
+  cancelSelect(){
+    this.setState({selectedStudent: null})
   }
   
   
@@ -23,7 +25,7 @@ export default class DashBoard extends Component {
           <StudentList getSelecting={id => this.selectItem(id)} students={studentList}/>
         </Col>
         <Col xs={12} md={4}>  
-          <StudentDetails privilege={[]} student={this.state.selectedStudent} />
+          <StudentDetails privilege={[]} student={this.state.selectedStudent} cancel={this.cancelSelect.bind(this)}/>
 
         </Col>
       </Grid>

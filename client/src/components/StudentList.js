@@ -10,6 +10,7 @@ class StudentList extends Component {
   }
   render() {
     var listStudent = this.props.students.map(student => <StudentItem handleSelect={this.handleSelect.bind(this)} key={student.studentId} {...student} />)
+    if(listStudent.length !== 0)
     return (
       <Table striped bordered condensed hover>
         <thead>
@@ -24,6 +25,7 @@ class StudentList extends Component {
         </tbody>
       </Table>
     )
+    else return <h3>Không có dữ liệu để hiển thị</h3>
   }
 }
 

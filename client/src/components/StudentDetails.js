@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {FormGroup, Form, ControlLabel, FormControl} from 'react-bootstrap'
+import {FormGroup, Form, ControlLabel, FormControl, Button} from 'react-bootstrap'
 import moment from 'moment'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
@@ -40,7 +40,7 @@ export default class StudentDetails extends Component {
         </FormGroup>
         <FormGroup>
           <ControlLabel>Tên</ControlLabel>
-          <FormControl disabled={this.props.privilege.indexOf('admin') === -1} type="text" value={this.state.priName} onChange={e => this.setState({priName: e.target .value})} />
+          <FormControl disabled={this.props.privilege.indexOf('admin') === -1} type="text" value={this.state.priName} onChange={e => this.setState({priName: e.target.value})} />
           <FormControl.Feedback />
         </FormGroup>
         <FormGroup>
@@ -58,7 +58,7 @@ export default class StudentDetails extends Component {
           <FormControl disabled={this.props.privilege.indexOf('admin') === -1} type="text" value={this.state.eduProgram} onChange={e => this.setState({eduProgram: e.target.value})} />
           <FormControl.Feedback />
         </FormGroup>
-
+        <Button onClick={e => this.props.cancel()}>Cancel</Button>
       </Form>
     )
     return null
