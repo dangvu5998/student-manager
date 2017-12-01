@@ -7,14 +7,14 @@ import NavBar from './components/NavBar'
 import {BrowserRouter as Router, Route, Redirect, Switch} from 'react-router-dom'
 class App extends Component {
   render() {
-    const {studentList, actions} = this.props
+    const {students, actions, checkoutStatus} = this.props
     return(
       <Router>
         
         <div>
           <Route path='/' component={NavBar} />
           <Switch>
-            <Route path='/dashboard' render={(props) => <DashBoard studentList={studentList} actions={actions} {...props} />} />
+            <Route path='/dashboard' render={(props) => <DashBoard students={students} status={checkoutStatus} actions={actions} {...props} />} />
             <Route path='/' render={()=> <Redirect to="/dashboard" />} />
           </Switch>
         </div>
@@ -23,7 +23,11 @@ class App extends Component {
   }
 }
 const mapStateToProps = state => {
-  return {studentList: state.studentList}
+  const { students, checkoutStatus } = state
+  return {
+    students,
+    checkoutStatus
+  }
 }
 const mapDispatchToProps = dispatch => {
   return {actions: bindActionCreators(actions, dispatch)}

@@ -1,19 +1,20 @@
-import { put, call, fork, takeEvery, takeLatest, all } from 'redux-saga/effects'
+import { put, call, takeLatest, all } from 'redux-saga/effects'
 import * as api from '../services'
 import * as types from '../actions/types'
 export function* fetchStudents(action) {
   try {
-    let studentList
+    let data
     switch(action.key) {
-      case 'id': studentList = yield call(api.fetchStudentById, action.id)
+      case 'id': data = yield call(api.fetchStudentById, action.val)
       break
-      case 'class': studentList = yield call(api.fetchStudentByClass, action.className)
+      case 'class': data = yield call(api.fetchStudentByClass, action.val, action.page)
       break
-      case 'name': studentList = yield call(api.fetchStudentByName, action.name)
+      case 'name': data = yield call(api.fetchStudentByName, action.val, action.page)
       break
-      default: studentList = yield []
+      default: data = yield null
     }
-    yield put({type: types.FETCH_STUDENT_SUCCESS, studentList})
+    
+    yield put({type: types.FETCH_STUDENT_SUCCESS, ...data})
   }
   catch(e) {
     yield put({type: types.FETCH_STUDENT_FAILURE, error: e})

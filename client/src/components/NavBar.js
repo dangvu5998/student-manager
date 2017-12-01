@@ -10,11 +10,11 @@ const NavBar = () => (
       </Navbar.Brand>
       <Navbar.Toggle />
     </Navbar.Header>
-    <Navbar.Collapse>
+    {/* <Navbar.Collapse>
       <Nav pullRight>
         <NavItem eventKey={1} href="#">Login</NavItem>
       </Nav>
-    </Navbar.Collapse>    
+    </Navbar.Collapse>     */}
   </Navbar>
 )
 export default NavBar

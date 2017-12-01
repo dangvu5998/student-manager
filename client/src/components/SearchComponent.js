@@ -3,17 +3,21 @@ import {FormControl, FormGroup, Form, Col, ControlLabel} from 'react-bootstrap'
 export default class SearchComponent extends Component {
   handleStudentId(e) {
     if(e.key === 'Enter')
+    if(e.target.value)
     this.props.fetchStudentsById(e.target.value)
   }
   handleStudentClass(e) {
     if(e.key === 'Enter')
+    if(e.target.value)
     this.props.fetchStudentsByClass(e.target.value)
   }
   handleStudentName(e) {
     if(e.key === 'Enter')
+    if(e.target.value)
     this.props.fetchStudentsByName(e.target.value)
   }
   render() {
+
     return (
       <Form horizontal>
         <FormGroup controlId="classStudent">
@@ -21,7 +25,7 @@ export default class SearchComponent extends Component {
             Tìm theo lớp sinh viên
           </Col>
           <Col sm={6}>
-            <FormControl type="text"  placeholder="Nhập tên lớp sinh viên" onKeyUp={this.handleStudentClass.bind(this)} />
+            <FormControl type="text" disabled={this.props.status.fetching}  placeholder="Nhập tên lớp sinh viên" onKeyUp={this.handleStudentClass.bind(this)} />
           </Col>
         </FormGroup>
         <FormGroup controlId="studentId">
@@ -29,7 +33,7 @@ export default class SearchComponent extends Component {
             Tìm theo MSSV
           </Col>
           <Col sm={6}>
-            <FormControl type="text"  placeholder="Nhập MSSV" onKeyUp={this.handleStudentId.bind(this)} />
+            <FormControl type="text" disabled={this.props.status.fetching}  placeholder="Nhập MSSV" onKeyUp={this.handleStudentId.bind(this)} />
           </Col>
         </FormGroup>
 
@@ -38,7 +42,7 @@ export default class SearchComponent extends Component {
             Tìm theo tên sinh viên
           </Col>
           <Col sm={6}>
-            <FormControl type="text" placeholder="Nhập tên sinh viên" onKeyUp={this.handleStudentName.bind(this)}/>
+            <FormControl type="text" disabled={this.props.status.fetching} placeholder="Nhập tên sinh viên" onKeyUp={this.handleStudentName.bind(this)}/>
           </Col>
         </FormGroup>
       </Form>

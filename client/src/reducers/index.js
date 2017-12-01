@@ -3,21 +3,35 @@ import {combineReducers} from 'redux'
 const initialState = {
   status: {
     fetching: false,
-    error: false
+    error: false,
+    key: null,
+    value: null
   },
-  studentList: []
+  students: {
+    list: [],
+    page: null,
+    maxPage: null
+  }
 }
 function checkoutStatus(state = initialState.status, action) {
   switch(action.type){
     case types.FETCH_STUDENT_REQUEST: 
     return {
+      ...state,
       fetching: true,
-      error: null
+      error: null,
+      key: action.key,
+      val: action.val
     }
     case types.FETCH_STUDENT_SUCCESS:
-    return initialState.status
+    return {
+      ...state,
+      fetching: false,
+      error: null,
+    }
     case types.FETCH_STUDENT_FAILURE:
     return {
+      ...state,
       fetching: false,
       error: action.error
     }
@@ -27,13 +41,19 @@ function checkoutStatus(state = initialState.status, action) {
   }
 }
 
-function studentList(state = initialState.studentList, action) {
+function students(state = initialState.students, action) {
+  console.log(state)
   switch(action.type) {
     case types.FETCH_STUDENT_SUCCESS:
-    return action.studentList
+    return {
+      ...state,
+      list: action.students,
+      page: action.page || state.page,
+      maxPage: action.maxPage || state.maxPage
+    }
     case types.FETCH_STUDENT_REQUEST: 
     case types.FETCH_STUDENT_FAILURE:
-    return []
+    return initialState.students
     default:
     return state
   }
@@ -41,6 +61,6 @@ function studentList(state = initialState.studentList, action) {
 
 const reducerRoot = combineReducers({
   checkoutStatus,
-  studentList
+  students
 })
 export default reducerRoot
