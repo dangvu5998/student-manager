@@ -7,5 +7,7 @@ Heroku demo: https://students-manager.herokuapp.com
 Prepare mongodb database 
 ```
 git clone https://github.com/dangvu5998/student-manager.git
+cd student-manager
+npm install && npm install --prefix client
 npm run dev
 ```
